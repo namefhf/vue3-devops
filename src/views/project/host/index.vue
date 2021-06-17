@@ -1,5 +1,5 @@
 <template>
-  <div class="m-4 p-4 bg-white">
+  <div class="p-4 m-4 bg-white">
     <BasicForm
       :labelWidth="100"
       :schemas="schemas"
@@ -7,16 +7,12 @@
       @submit="handleSubmit"
     />
     <a-space>
-      <a-button type="primary" @click="handleClick">新建</a-button>
+      <a-button type="primary" @click="visible = !visible">新建</a-button>
       <a-button type="primary">批量导入</a-button>
     </a-space>
 
     <Basic-table :dataSource="tableData" :columns="columns" :canResize="false" />
-    <a-modal v-model:visible="visible" title="新建主机" @ok="handleOk">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </a-modal>
+    <new-host-modal v-bind="$attrs" v-model:visible="visible" title="新建主机" :width="800" />
   </div>
 </template>
 
@@ -27,6 +23,7 @@
   import { BasicTable } from '/@/components/Table';
   import { hostApi } from '/@/api/project/host';
   import { ref } from 'vue';
+  import NewHostModal from './components/NewHostModal.vue';
   const schemas: FormSchema[] = [
     {
       field: 'Catefield',
@@ -79,9 +76,10 @@
     },
   ];
   export default defineComponent({
-    components: { BasicForm, BasicTable },
+    components: { BasicForm, BasicTable, NewHostModal },
     setup() {
       const { createMessage } = useMessage();
+      const visible = ref<boolean>(false);
       const columns = [
         {
           title: '类别',
@@ -110,15 +108,11 @@
         },
       ];
       const tableData = ref([]);
-      const visible = ref<boolean>(false);
       const initData = async () => {
         const data = await hostApi();
-        console.log(data);
         tableData.value = data.hosts;
       };
       initData();
-
-      const handleOk = () => {};
       return {
         schemas,
         handleSubmit: (values: any) => {
@@ -127,10 +121,6 @@
         tableData,
         columns,
         visible,
-        handleClick: () => {
-          visible.value = true;
-        },
-        handleOk,
       };
     },
   });

@@ -6,6 +6,7 @@ import {
   Input,
   Space,
   Modal,
+  Form,
 } from 'ant-design-vue';
 
 import { App } from 'vue';
@@ -17,5 +18,5 @@ export function registerGlobComp(app: App) {
     app.component(comp.name || comp.displayName, comp);
   });
 
-  app.use(Input).use(Space).use(Modal).use(Button);
+  app.use(Input).use(Space).use(Modal).use(Form).use(Button);
 }
