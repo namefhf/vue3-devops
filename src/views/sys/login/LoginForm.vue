@@ -129,9 +129,13 @@
       const loading = ref(false);
       const rememberMe = ref(false);
 
+      // const formData = reactive({
+      //   account: 'vben',
+      //   password: '123456',
+      // });
       const formData = reactive({
-        account: 'vben',
-        password: '123456',
+        account: 'admin',
+        password: 'spug',
       });
 
       const { validForm } = useFormValid(formRef);
@@ -149,13 +153,20 @@
             toRaw({
               password: data.password,
               username: data.account,
+              type: 'default',
               mode: 'none', //不要默认的错误提示
             })
           );
+
           if (userInfo) {
+            // notification.success({
+            //   message: t('sys.login.loginSuccessTitle'),
+            //   description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+            //   duration: 3,
+            // });
             notification.success({
               message: t('sys.login.loginSuccessTitle'),
-              description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+              // description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
               duration: 3,
             });
           }

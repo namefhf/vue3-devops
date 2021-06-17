@@ -11,7 +11,8 @@ import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 
-import { getUserInfo, loginApi } from '/@/api/sys/user';
+import { loginApi } from '/@/api/sys/user';
+// import { getUserInfo, loginApi } from '/@/api/sys/user';
 
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
@@ -84,10 +85,12 @@ export const useUserStore = defineStore({
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
-        const { token } = data;
+
+        const { access_token } = data;
 
         // save token
-        this.setToken(token);
+        // this.setToken(token);
+        this.setToken(access_token);
         // get user info
         const userInfo = await this.getUserInfoAction();
 
@@ -96,11 +99,31 @@ export const useUserStore = defineStore({
         !sessionTimeout && goHome && (await router.replace(PageEnum.BASE_HOME));
         return userInfo;
       } catch (error) {
+        // console.log(error);
         return Promise.reject(error);
       }
     },
     async getUserInfoAction() {
-      const userInfo = await getUserInfo();
+      // const userInfo = await getUserInfo();
+      const userInfo = {
+        code: 0,
+        userId: '1',
+        username: 'vben',
+        realName: 'Vben Admin',
+        avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
+        desc: 'manager',
+        password: '123456',
+        token: 'fakeToken1',
+        roles: [
+          {
+            roleName: 'Super Admin',
+            value: 'super',
+          },
+        ],
+        message: 'ok',
+        type: 'success',
+      };
+
       const { roles } = userInfo;
       const roleList = roles.map((item) => item.value) as RoleEnum[];
       this.setUserInfo(userInfo);

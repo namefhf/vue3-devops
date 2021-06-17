@@ -4,6 +4,7 @@
 export interface LoginParams {
   username: string;
   password: string;
+  type: string;
 }
 
 export interface RoleInfo {
@@ -16,7 +17,8 @@ export interface RoleInfo {
  */
 export interface LoginResultModel {
   userId: string | number;
-  token: string;
+  // token: string;
+  access_token: string;
   role: RoleInfo;
 }
 

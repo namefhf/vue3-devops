@@ -20,11 +20,15 @@ export interface RequestOptions {
   ignoreCancelToken?: boolean;
 }
 
+// export interface Result<T = any> {
+//   code: number;
+//   type: 'success' | 'error' | 'warning';
+//   message: string;
+//   result: T;
+// }
 export interface Result<T = any> {
-  code: number;
-  type: 'success' | 'error' | 'warning';
-  message: string;
-  result: T;
+  error: string;
+  data: T;
 }
 
 // multipart/form-data: upload file
