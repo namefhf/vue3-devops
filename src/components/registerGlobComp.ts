@@ -7,6 +7,9 @@ import {
   Space,
   Modal,
   Form,
+  Select,
+  Row,
+  Col,
 } from 'ant-design-vue';
 
 import { App } from 'vue';
@@ -18,5 +21,5 @@ export function registerGlobComp(app: App) {
     app.component(comp.name || comp.displayName, comp);
   });
 
-  app.use(Input).use(Space).use(Modal).use(Form).use(Button);
+  app.use(Input).use(Space).use(Modal).use(Form).use(Select).use(Row).use(Col).use(Button);
 }

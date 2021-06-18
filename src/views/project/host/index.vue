@@ -8,11 +8,26 @@
     />
     <a-space>
       <a-button type="primary" @click="visible = !visible">新建</a-button>
-      <a-button type="primary">批量导入</a-button>
+      <a-button type="primary" @click="Importvisible = !Importvisible">批量导入</a-button>
     </a-space>
 
     <Basic-table :dataSource="tableData" :columns="columns" :canResize="false" />
-    <new-host-modal v-bind="$attrs" v-model:visible="visible" title="新建主机" :width="800" />
+    <new-host-modal
+      v-bind="$attrs"
+      v-model:visible="visible"
+      title="新建主机"
+      :bodyStyle="bodyStyle"
+      :width="800"
+      okText="验证"
+    />
+    <import-model
+      v-bind="$attrs"
+      v-model:visible="Importvisible"
+      title="批量导入"
+      :bodyStyle="bodyStyle"
+      :width="800"
+      okText="导入"
+    />
   </div>
 </template>
 
@@ -24,6 +39,7 @@
   import { hostApi } from '/@/api/project/host';
   import { ref } from 'vue';
   import NewHostModal from './components/NewHostModal.vue';
+  import ImportModel from './components/ImportModel.vue';
   const schemas: FormSchema[] = [
     {
       field: 'Catefield',
@@ -76,10 +92,12 @@
     },
   ];
   export default defineComponent({
-    components: { BasicForm, BasicTable, NewHostModal },
+    components: { BasicForm, BasicTable, NewHostModal, ImportModel },
     setup() {
       const { createMessage } = useMessage();
       const visible = ref<boolean>(false);
+      const Importvisible = ref<boolean>(false);
+
       const columns = [
         {
           title: '类别',
@@ -121,6 +139,8 @@
         tableData,
         columns,
         visible,
+        Importvisible,
+        bodyStyle: { padding: '10px' },
       };
     },
   });
