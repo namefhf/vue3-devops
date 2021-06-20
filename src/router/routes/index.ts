@@ -7,11 +7,12 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { t } from '/@/hooks/web/useI18n';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
-
 const routeModuleList: AppRouteModule[] = [];
 
 Object.keys(modules).forEach((key) => {
+  // console.log(key);
   const mod = modules[key].default || {};
+  // console.log(mod);
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
 });

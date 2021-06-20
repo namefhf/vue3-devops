@@ -78,85 +78,53 @@
           margin-bottom: 20px;
         }
 
-        .dot {
+        .nature-6 {
           position: relative;
-          display: inline-block;
-          width: 48px;
-          height: 48px;
-          margin-top: 30px;
-          font-size: 32px;
-          transform: rotate(45deg);
-          box-sizing: border-box;
-          animation: antRotate 1.2s infinite linear;
-        }
-
-        .dot i {
-          position: absolute;
-          display: block;
           width: 20px;
-          height: 20px;
-          background-color: #0065cc;
-          border-radius: 100%;
-          opacity: 0.3;
-          transform: scale(0.75);
-          animation: antSpinMove 1s infinite linear alternate;
-          transform-origin: 50% 50%;
+          height: 80px;
+          background: #935936;
         }
 
-        .dot i:nth-child(1) {
-          top: 0;
-          left: 0;
+        .nature-6::before {
+          position: absolute;
+          top: 10px;
+          left: -22px;
+          width: 25px;
+          height: 60px;
+          background: radial-gradient(farthest-side, #fff 92%, #0000) 60% 6px/4px 4px,
+            radial-gradient(50% 60%, #53707b 92%, #0000) center/70% 55%,
+            radial-gradient(farthest-side, #53707b 92%, #0000) 50% 3px/14px 14px,
+            radial-gradient(142% 100% at bottom right, #0000 64%, #53707b 65%) bottom/57% 40%,
+            conic-gradient(from -120deg at right, #53707b 36deg, #0000 0) 100% 3px/51% 12px,
+            conic-gradient(from 120deg at top left, #0000, #ef524a 2deg 40deg, #0000 43deg) top/100%
+              10px;
+          background-repeat: no-repeat;
+          content: '';
+          transform: rotate(-26deg);
+          animation: n6 0.25s infinite linear alternate;
+          transform-origin: 100% 80%;
         }
 
-        .dot i:nth-child(2) {
-          top: 0;
-          right: 0;
-          -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
+        .nature-6::after {
+          position: absolute;
+          bottom: 15px;
+          left: -6px;
+          width: 6px;
+          height: 12px;
+          background: #53707b;
+          border-radius: 100px 0 0 100px;
+          content: '';
         }
 
-        .dot i:nth-child(3) {
-          right: 0;
-          bottom: 0;
-          -webkit-animation-delay: 0.8s;
-          animation-delay: 0.8s;
-        }
-
-        .dot i:nth-child(4) {
-          bottom: 0;
-          left: 0;
-          -webkit-animation-delay: 1.2s;
-          animation-delay: 1.2s;
-        }
-        @keyframes antRotate {
-          to {
-            -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
-          }
-        }
-        @-webkit-keyframes antRotate {
-          to {
-            -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
-          }
-        }
-        @keyframes antSpinMove {
-          to {
-            opacity: 1;
-          }
-        }
-        @-webkit-keyframes antSpinMove {
-          to {
-            opacity: 1;
+        @keyframes n6 {
+          100% {
+            transform: rotate(0);
           }
         }
       </style>
       <div class="app-loading">
         <div class="app-loading-wrap">
-          <img src="/resource/img/logo.png" class="app-loading-logo" alt="Logo" />
-          <div class="app-loading-dots">
-            <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
-          </div>
+          <div class="nature-6"></div>
           <div class="app-loading-title"><%= title %></div>
         </div>
       </div>
